@@ -1232,5 +1232,8 @@
 		<module>finance-model</module>
 		<module>finance-common</module>
 		<module>finance-interface</module>
+		<module>finance-service</module>
+		<module>finace-management</module>
+		<module>finance-mongo</module>
 	</modules>
 </project>
