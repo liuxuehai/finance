@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<workbook>
+	<worksheet idx="0">
+		<loop startRow="2" items="stockInfos" var="stock"
+			varType="com.pi.stock.model.StockInfo">
+			<section startRow="0" >
+				<mapping  col="0">stock.code</mapping>
+				<mapping  col="1">stock.name</mapping>
+				<mapping  col="2">stock.fullName</mapping>
+				<mapping  col="3">stock.enName</mapping>
+				<mapping  col="4">stock.address</mapping>
+				<mapping  col="5">stock.codeA</mapping>
+				<mapping  col="6">stock.nameA</mapping>
+				<mapping  col="7">stock.dateA</mapping>
+				<mapping  col="8">stock.gCapitalA</mapping>
+				<mapping  col="9">stock.fCapitalA</mapping>
+				<mapping  col="10">stock.codeB</mapping>
+				<mapping  col="11">stock.nameB</mapping>
+				<mapping  col="12">stock.dateB</mapping>
+				<mapping  col="13">stock.gCapitalB</mapping>
+				<mapping  col="14">stock.fCapitalB</mapping>
+				<mapping  col="15">stock.area</mapping>
+				<mapping  col="16">stock.province</mapping>
+				<mapping  col="17">stock.city</mapping>
+				<mapping  col="18">stock.industry</mapping>
+				<mapping  col="19">stock.website</mapping>
+			</section>
+			<loopbreakcondition>
+                    <rowcheck offset="0">
+                    </rowcheck>
+            </loopbreakcondition>
+		</loop>
+	</worksheet>
+</workbook>
