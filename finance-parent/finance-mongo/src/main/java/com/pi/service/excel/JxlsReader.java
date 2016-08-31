@@ -8,15 +8,15 @@ import java.io.InputStream;
 import java.util.Map;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.jxls.reader.ReaderBuilder;
+import org.jxls.reader.XLSReadStatus;
+import org.jxls.reader.XLSReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 import org.xml.sax.SAXException;
 
-import net.sf.jxls.reader.ReaderBuilder;
-import net.sf.jxls.reader.XLSReadStatus;
-import net.sf.jxls.reader.XLSReader;
 
 @Service
 public class JxlsReader {
