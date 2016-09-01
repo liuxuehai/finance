@@ -48,6 +48,6 @@
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<!-- 扫描实现 -->
-	<context:component-scan base-package="hello;com.pi" />
+	<context:component-scan base-package="hello;com.pi.service.*" />
 
 </beans>

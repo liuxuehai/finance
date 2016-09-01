@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<workbook>
+	<worksheet idx="0">
+		<loop startRow="2" items="stockPrices" var="stock"
+			varType="com.pi.stock.model.StockPriceDetail">
+			<section startRow="0" >
+				<mapping  col="0">stock.dateTime</mapping>
+				<mapping  col="1">stock.price</mapping>
+				<mapping  col="2">stock.priceM</mapping>
+				<mapping  col="3">stock.volume</mapping>
+				<mapping  col="4">stock.turnover</mapping>
+				<mapping  col="5">stock.type</mapping>
+			</section>
+			<loopbreakcondition>
+                    <rowcheck offset="0">
+                    </rowcheck>
+            </loopbreakcondition>
+		</loop>
+	</worksheet>
+</workbook>
