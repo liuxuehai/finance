@@ -27,8 +27,11 @@
 		location="classpath:mongodb.properties" />
 
 	<!-- 通过工厂Bean创建mongo连接实例,没有密码就把username和password属性删除了 -->
+	<!-- <mongo:db-factory host="${db.host}" port="${db.port}"
+		dbname="${db.database}" username="${db.username}" password="${db.password}" /> -->
+		
 	<mongo:db-factory host="${db.host}" port="${db.port}"
-		dbname="${db.database}" username="${db.username}" password="${db.password}" />
+		dbname="${db.database}"  />
 
 
 	<!-- mongo模板操作对象 -->

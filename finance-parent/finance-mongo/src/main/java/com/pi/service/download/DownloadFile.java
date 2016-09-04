@@ -5,24 +5,19 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.pi.stock.model.StockInfo;
-
 public class DownloadFile {
 	protected final transient static Logger logger = LoggerFactory.getLogger(DownloadFile.class);
-	private final static String USER_AGENT = "Mozilla/5.0";
+	private final static String USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.82 Safari/537.36";
 
 	public static void downloadFile(URL theURL, String filePath, String filename) throws IOException {
 		File dirFile = new File(filePath);
@@ -44,26 +39,21 @@ public class DownloadFile {
 	}
 
 	public static void downloadGet(DownloadRequest info) {
-		logger.info("下载文件开始,url:[{}],请求参数:[{}]", info.getUrl(),info.getParam().toString());
+		logger.info("下载文件开始,url:[{}],请求参数:[{}]", info.getUrl(), info.getParam().toString());
 
 		HttpClient client = HttpClientBuilder.create().build();
 		HttpGet request = new HttpGet(info.getUrl());
 
 		// add request header
 		request.addHeader("User-Agent", USER_AGENT);
+		request.addHeader("Accept-Encoding", "gzip, deflate, sdch");
+		request.addHeader("Accept-Language", "en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4");
+		request.addHeader("Referer", "http://www.sse.com.cn/");
 		request.addHeader("Content-Type", "application/vnd.ms-excel;charset=gb2312");
+		request.addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
 		try {
-			HttpResponse response = client.execute(request);
-			logger.info("Response Code : [{}]" , response.getStatusLine().getStatusCode());
-
-			BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "gb2312"));
-
-			List<String> resultList = new ArrayList<String>();
-			String line = "";
-			while ((line = rd.readLine()) != null) {
-				// 结果为一行一行的,同时通过\t分割
-				resultList.add(line);
-			}
+			List<String> list = client.execute(request, info.getResponseHandler());
+			logger.info("总条数:[{}]", list.size());
 
 		} catch (IOException e) {
 		} finally {

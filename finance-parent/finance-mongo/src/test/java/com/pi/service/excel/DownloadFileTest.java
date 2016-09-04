@@ -7,6 +7,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import com.pi.service.download.DownloadFile;
 import com.pi.service.download.DownloadRequest;
+import com.pi.service.handler.SinaDetailHandle;
 
 public class DownloadFileTest {
 
@@ -19,6 +20,8 @@ public class DownloadFileTest {
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("date", date);
 		param.put("symbol", symbol);
+		SinaDetailHandle sinaDetailHandle=new SinaDetailHandle();
+		request.setResponseHandler(sinaDetailHandle);
 		request.setParam(param);
 		DownloadFile.downloadGet(request);
 	}

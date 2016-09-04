@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import com.pi.service.download.DownloadFile;
 
 public abstract class AbstractResponseHandler implements ResponseHandler<List<String>> {
+	
 	protected final static Logger logger = LoggerFactory.getLogger(DownloadFile.class);
 
 	public List<String> handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
