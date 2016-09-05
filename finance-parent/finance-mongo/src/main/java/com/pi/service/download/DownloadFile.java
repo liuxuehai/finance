@@ -9,6 +9,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 
+import org.apache.http.Header;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -16,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class DownloadFile {
+	
 	protected final transient static Logger logger = LoggerFactory.getLogger(DownloadFile.class);
 	private final static String USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.82 Safari/537.36";
 
@@ -45,12 +47,12 @@ public class DownloadFile {
 		HttpGet request = new HttpGet(info.getUrl());
 
 		// add request header
-		request.addHeader("User-Agent", USER_AGENT);
-		request.addHeader("Accept-Encoding", "gzip, deflate, sdch");
-		request.addHeader("Accept-Language", "en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4");
-		request.addHeader("Referer", "http://www.sse.com.cn/");
-		request.addHeader("Content-Type", "application/vnd.ms-excel;charset=gb2312");
-		request.addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+		if (info.getHeaders() != null) {
+			for (Header header : info.getHeaders()) {
+				request.addHeader(header);
+			}
+		}
+
 		try {
 			List<String> list = client.execute(request, info.getResponseHandler());
 			logger.info("总条数:[{}]", list.size());
