@@ -34,13 +34,13 @@ public class ExcelClient {
 		} catch (IOException e) {
 			logger.error("获取文件失败,url:[{}],错误:[{}]", request.getUrl(), e);
 		} finally {
-			if (client != null) {
-				try {
-					client.close();
-				} catch (IOException e) {
-					logger.error("关闭连接失败,错误:[{}]", e);
-				}
-			}
+//			if (client != null) {
+//				try {
+//					client.close();
+//				} catch (IOException e) {
+//					logger.error("关闭连接失败,错误:[{}]", e);
+//				}
+//			}
 		}
 		logger.info("下载文件结束");
 	}
