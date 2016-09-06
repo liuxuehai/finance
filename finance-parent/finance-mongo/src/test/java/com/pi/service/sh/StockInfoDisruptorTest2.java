@@ -11,11 +11,11 @@ import com.pi.base.HttpMethod;
 import com.pi.common.Constants;
 import com.pi.service.handler.StockInfoHandler;
 
-public class StockInfoDisruptorTest {
+public class StockInfoDisruptorTest2 {
 
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring/*.xml");
-		StockInfoDisruptor stockInfoDisruptor = context.getBean(StockInfoDisruptor.class);
+		StockInfoDisruptor2 stockInfoDisruptor = context.getBean(StockInfoDisruptor2.class);
 		String url = "http://query.sse.com.cn/security/stock/downloadStockListFile.do?stockType=1";
 		ExcelRequest request = new ExcelRequest();
 		request.setUrl(url);
