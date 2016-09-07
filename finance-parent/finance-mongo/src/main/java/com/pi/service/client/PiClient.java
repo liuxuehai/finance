@@ -1,15 +1,11 @@
 package com.pi.service.client;
 
-import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -21,7 +17,7 @@ public class PiClient {
 
 	private Logger logger = LoggerFactory.getLogger(PiClient.class);
 
-	public HttpRequestBase getRequestBase(BaseRequest request) {
+	public HttpRequestBase getRequestBase(BaseRequest<? extends Object> request) {
 		HttpRequestBase requestBase = null;
 		if (request.getHttpMethod() == HttpMethod.GET) {
 			requestBase = new HttpGet(request.getUrl());

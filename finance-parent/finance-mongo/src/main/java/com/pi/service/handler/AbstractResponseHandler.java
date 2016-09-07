@@ -18,6 +18,8 @@ import com.pi.service.download.DownloadFile;
 public abstract class AbstractResponseHandler implements ResponseHandler<List<String>> {
 
 	protected final static Logger logger = LoggerFactory.getLogger(DownloadFile.class);
+	//是否移除excel头
+	private boolean removeTitle=false;
 
 	public List<String> handleResponse(HttpResponse response) {
 		logger.info("Response Code : [{}]", response.getStatusLine().getStatusCode());
@@ -29,6 +31,10 @@ public abstract class AbstractResponseHandler implements ResponseHandler<List<St
 			while ((line = rd.readLine()) != null) {
 				// 结果为一行一行的,同时通过\t分割
 				resultList.add(line);
+			}
+			
+			if(removeTitle){
+				resultList.remove(0);
 			}
 			filter(resultList);
 			in.close();
@@ -45,6 +51,14 @@ public abstract class AbstractResponseHandler implements ResponseHandler<List<St
 		}
 
 		return resultList;
+	}
+
+	public boolean isRemoveTitle() {
+		return removeTitle;
+	}
+
+	public void setRemoveTitle(boolean removeTitle) {
+		this.removeTitle = removeTitle;
 	}
 
 	public abstract void filter(List<String> resultList);

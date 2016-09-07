@@ -2,7 +2,11 @@ package com.pi.base;
 
 import java.util.Map;
 
-public class BaseRequest extends BaseObject {
+import org.apache.http.client.ResponseHandler;
+
+import com.pi.service.processor.BaseProcessor;
+
+public class BaseRequest<T extends Object> extends BaseObject {
 
 	/**
 	 * 
@@ -13,6 +17,8 @@ public class BaseRequest extends BaseObject {
 	private Map<String, String> param;
 	private Map<String, String> header;
 	private HttpMethod httpMethod;
+	private ResponseHandler<T> responseHandler;
+	private BaseProcessor<T> processor;
 
 	public String getUrl() {
 		return url;
@@ -44,5 +50,21 @@ public class BaseRequest extends BaseObject {
 
 	public void setHttpMethod(HttpMethod httpMethod) {
 		this.httpMethod = httpMethod;
+	}
+
+	public ResponseHandler<? extends Object> getResponseHandler() {
+		return responseHandler;
+	}
+
+	public void setResponseHandler(ResponseHandler<T> responseHandler) {
+		this.responseHandler = responseHandler;
+	}
+
+	public BaseProcessor<T> getProcessor() {
+		return processor;
+	}
+
+	public void setProcessor(BaseProcessor<T> processor) {
+		this.processor = processor;
 	}
 }

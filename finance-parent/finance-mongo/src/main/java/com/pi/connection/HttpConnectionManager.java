@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class HttpConnectionManager {
+	
 	PoolingHttpClientConnectionManager cm = null;
 
 	@PostConstruct

@@ -6,7 +6,6 @@ public class StockInfoHandler extends AbstractResponseHandler {
 
 	@Override
 	public void filter(List<String> resultList) {
-		resultList.remove(0);
-	}
 
+	}
 }
