@@ -22,8 +22,13 @@ public abstract class AbstractResponseHandler implements ResponseHandler<List<St
 	private boolean removeTitle=false;
 
 	public List<String> handleResponse(HttpResponse response) {
-		logger.info("Response Code : [{}]", response.getStatusLine().getStatusCode());
+		int status=response.getStatusLine().getStatusCode();
+		logger.info("Response Code : [{}]", status);
+		
 		List<String> resultList = new ArrayList<String>();
+        if(status!=200){
+			return resultList;
+		}
 		try {
 			InputStream in = response.getEntity().getContent();
 			BufferedReader rd = new BufferedReader(new InputStreamReader(in, "gb2312"));

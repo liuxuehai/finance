@@ -8,6 +8,8 @@ public class StockPriceDetail implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private String code;
+	private String date;
 	private String dateTime;
 	private String price;
 	private String priceM;
@@ -15,6 +17,18 @@ public class StockPriceDetail implements Serializable{
 	private String turnover;
 	private String type;
 	
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
 	public String getDateTime() {
 		return dateTime;
 	}
