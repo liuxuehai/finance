@@ -16,14 +16,14 @@ public class StockInfoEventHandler implements EventHandler<StockInfoEvent> {
 	private Logger logger = LoggerFactory.getLogger(StockInfoEventHandler.class);
 	@Autowired
 	ExcelClient excelClient;
-	
+
 	@Override
 	public void onEvent(StockInfoEvent event, long sequence, boolean endOfBatch) throws Exception {
-		logger.info("事件:[{}]处理开始,序号为:[{}]",event.toString(),sequence);
+		logger.info("股票信息事件:[{}]处理开始,序号为:[{}]", event.getRequest().getUrl(), sequence);
 		try {
 			excelClient.get(event.getRequest());
 		} catch (Exception e) {
-			logger.error("事件:[{}]处理出错,错误:[{}]",event.toString(),e);
+			logger.error("股票信息事件:[{}]处理出错,错误:[{}]", event.getRequest().getUrl(), e);
 		}
 	}
 

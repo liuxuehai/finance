@@ -24,7 +24,7 @@
 	<!-- 提供该PropertyPlaceholderConfigurer bean支持把properties文件中的信息读取到XML配置文件的表达式中 -->
 	<!-- 从Spring2.5开始引入命名空间配置加载properties文件到XML -->
 	<context:property-placeholder
-		location="classpath:mongodb.properties" />
+		location="classpath:mongodb.properties,classpath:log.properties" />
 
 	<!-- 通过工厂Bean创建mongo连接实例,没有密码就把username和password属性删除了 -->
 	<!-- <mongo:db-factory host="${db.host}" port="${db.port}"

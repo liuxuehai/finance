@@ -37,9 +37,9 @@ import com.pi.stock.model.StockInfo;
 @ContextConfiguration(locations = "classpath:spring/*.xml")
 public class JxlsReaderTest {
 
-	// @Autowired
+	 @Autowired
 	JxlsReader jxlsReader;
-	// @Autowired
+	 @Autowired
 	private MongoTemplate mongo;
 
 	@Test
@@ -47,12 +47,12 @@ public class JxlsReaderTest {
 		Map beans = new HashMap();
 		List departments = new ArrayList();
 		beans.put("stockInfos", departments);
-		jxlsReader.readExcel("classpath:stock.xml", "F:\\tools\\上市公司列表.xlsx", beans);
+		jxlsReader.readExcel("classpath:stock.xml", "/home/liuping/Downloads/上市公司列表.xlsx", beans);
 		departments = (List) beans.get("stockInfos");
 		System.out.println(departments.size());
-
+		departments.remove(0);
 		mongo.insert(departments, StockInfo.class);
-	}
+;	}
 
 	@Test
 	public void test2() {

@@ -11,6 +11,7 @@ import com.pi.base.HttpMethod;
 import com.pi.service.handler.StockInfoHandler;
 import com.pi.service.header.HeaderBuilder;
 import com.pi.service.processor.StockInfoProcessor;
+import com.pi.service.processor.SzStockInfoProcessor;
 
 public class StockInfoDisruptorTest3 {
 
@@ -30,9 +31,8 @@ public class StockInfoDisruptorTest3 {
 		request.setParam(param);
 		request.setHttpMethod(HttpMethod.GET);
 		request.setProcessor(context.getBean(StockInfoProcessor.class));
-		stockInfoDisruptor.publish(request);
-		
-		
+		// stockInfoDisruptor.publish(request);
+
 		ExcelRequest request2 = new ExcelRequest();
 		String url2 = "http://query.sse.com.cn/security/stock/downloadStockListFile.do?stockType=2";
 		request2.setUrl(url2);
@@ -45,7 +45,21 @@ public class StockInfoDisruptorTest3 {
 		request2.setParam(param2);
 		request2.setHttpMethod(HttpMethod.GET);
 		request2.setProcessor(context.getBean(StockInfoProcessor.class));
-		stockInfoDisruptor.publish(request2);
-		
+		// stockInfoDisruptor.publish(request2);
+
+		ExcelRequest request3 = new ExcelRequest();
+		String url3 = "http://www.szse.cn/szseWeb/ShowReport.szse?SHOWTYPE=xlsx&CATALOGID=1110&tab1PAGENUM=1&ENCODE=1&TABKEY=tab1";
+		request3.setUrl(url3);
+		Map<String, String> param3 = new HashMap<String, String>();
+		StockInfoHandler sinaDetailHandle3 = new StockInfoHandler();
+		sinaDetailHandle3.setRemoveTitle(true);
+		request3.setHeader(HeaderBuilder.getHeader(HeaderBuilder.SHENZHEN));
+		request3.setResponseHandler(sinaDetailHandle3);
+		request3.setParam(param3);
+		request3.setHttpMethod(HttpMethod.GET);
+		request3.setProcessor(context.getBean(SzStockInfoProcessor.class));
+
+		stockInfoDisruptor.publish(request3);
+
 	}
 }

@@ -15,7 +15,7 @@ public class StockInfoProducer implements WorkHandler<StockInfoEvent> {
 
 	@Override
 	public void onEvent(StockInfoEvent event) throws Exception {
-		logger.info("事件:[{}]生产开始", event.toString());
+		logger.info("生产事件:[{}]生产开始", event.getRequest().getUrl());
 	}
 
 }

@@ -18,7 +18,8 @@ public class StockInfoDisruptorTest4 {
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring/*.xml");
 		StockInfoDisruptor2 stockInfoDisruptor = context.getBean(StockInfoDisruptor2.class);
-		String url = "http://market.finance.sina.com.cn/downxls.php?date=2016-08-24&symbol=sh601766";
+		//String url = "http://market.finance.sina.com.cn/downxls.php?date=2016-08-24&symbol=sh601766";
+		String url="http://market.finance.sina.com.cn/downxls.php?date=2016-09-09&symbol=sh600021";
 		ExcelRequest request = new ExcelRequest();
 		request.setUrl(url);
 		Map<String, String> param = new HashMap<String, String>();
@@ -33,7 +34,7 @@ public class StockInfoDisruptorTest4 {
 		request.setHttpMethod(HttpMethod.GET);
 		request.setProcessor(context.getBean(StockPriceProcessor.class));
 		stockInfoDisruptor.publish(request);
-		
+		//2004-10-8
 		
 	}
 }

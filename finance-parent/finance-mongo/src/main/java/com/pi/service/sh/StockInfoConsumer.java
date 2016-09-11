@@ -19,11 +19,11 @@ public class StockInfoConsumer implements WorkHandler<StockInfoEvent> {
 
 	@Override
 	public void onEvent(StockInfoEvent event) throws Exception {
-		logger.info("事件:[{}]处理开始", event.toString());
+		logger.info("消费事件:[{}]处理开始",  event.getRequest().getUrl());
 		try {
 			commonClient.get(event.getRequest());
 		} catch (Exception e) {
-			logger.error("事件:[{}]处理出错,错误:[{}]", event.toString(), e);
+			logger.error("消费事件:[{}]处理出错,错误:[{}]",  event.getRequest().getUrl(), e);
 		}
 	}
 
