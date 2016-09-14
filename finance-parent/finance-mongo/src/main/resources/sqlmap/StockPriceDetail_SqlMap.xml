@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pi.stock.dao.StockPriceDetailDAO">
+	<resultMap id="BaseResultMap" type="com.pi.stock.model.StockPriceDetail">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
+		<result column="date" property="date" jdbcType="VARCHAR" />
+		<result column="dateTime" property="dateTime" jdbcType="VARCHAR" />
+		<result column="price" property="price" jdbcType="VARCHAR" />
+		<result column="priceChange" property="priceChange" jdbcType="VARCHAR" />
+		<result column="volume" property="volume" jdbcType="VARCHAR" />
+		<result column="turnover" property="turnover" jdbcType="VARCHAR" />
+		<result column="type" property="type" jdbcType="VARCHAR" />
+		<result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="updateTime" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, code, date, dateTime, price, priceChange, volume,
+		turnover, type,
+		createTime,
+		updateTime
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from StockPriceDetail
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="com.pi.stock.model.StockPriceDetail">
+		insert into StockPriceDetail (
+		code, date,
+		dateTime, price, priceChange,
+		volume, turnover, type,
+		createTime, updateTime)
+		values ( #{code,jdbcType=VARCHAR},
+		#{date,jdbcType=VARCHAR},
+		#{dateTime,jdbcType=VARCHAR},
+		#{price,jdbcType=VARCHAR},
+		#{priceChange,jdbcType=VARCHAR},
+		#{volume,jdbcType=VARCHAR}, #{turnover,jdbcType=VARCHAR},
+		#{type,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP})
+	</insert>
+	<update id="updateByPrimaryKey" parameterType="com.pi.stock.model.StockPriceDetail">
+		update
+		StockPriceDetail
+		set code = #{code,jdbcType=VARCHAR},
+		date =
+		#{date,jdbcType=VARCHAR},
+		dateTime = #{dateTime,jdbcType=VARCHAR},
+		price = #{price,jdbcType=VARCHAR},
+		priceChange =
+		#{priceChange,jdbcType=VARCHAR},
+		volume = #{volume,jdbcType=VARCHAR},
+		turnover = #{turnover,jdbcType=VARCHAR},
+		type =
+		#{type,jdbcType=VARCHAR},
+		createTime =
+		#{createTime,jdbcType=TIMESTAMP},
+		updateTime =
+		#{updateTime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<insert id="insertPriceBatch" useGeneratedKeys="true"
+		parameterType="java.util.List">
+		insert into StockPriceDetail ( code, date,
+		dateTime, price,
+		priceChange,
+		volume, turnover, type,
+		createTime, updateTime)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.code},#{item.date},#{item.dateTime},#{item.price}
+			,#{item.priceChange},#{item.volume},#{item.turnover},#{item.type}
+			,#{item.createTime},#{item.updateTime})
+		</foreach>
+	</insert>
+</mapper>

@@ -9,6 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -31,28 +32,35 @@ import org.springframework.util.StringUtils;
 
 import com.pi.service.download.DownloadFile;
 import com.pi.service.mongo.StockInfoRepository;
+import com.pi.stock.dao.StockInfoDAO;
 import com.pi.stock.model.StockInfo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring/*.xml")
 public class JxlsReaderTest {
 
-	 @Autowired
+	@Autowired
 	JxlsReader jxlsReader;
-	 @Autowired
+	// @Autowired
 	private MongoTemplate mongo;
+	@Autowired
+	private StockInfoDAO stockInfoDAO;
 
 	@Test
 	public void test() {
 		Map beans = new HashMap();
-		List departments = new ArrayList();
+		List<StockInfo> departments = new ArrayList<StockInfo>();
 		beans.put("stockInfos", departments);
-		jxlsReader.readExcel("classpath:stock.xml", "/home/liuping/Downloads/上市公司列表.xlsx", beans);
-		departments = (List) beans.get("stockInfos");
+		jxlsReader.readExcel("classpath:stock.xml", "F:\\tools\\上市公司列表.xlsx", beans);
+		departments = (List<StockInfo>) beans.get("stockInfos");
 		System.out.println(departments.size());
 		departments.remove(0);
-		mongo.insert(departments, StockInfo.class);
-;	}
+		// mongo.insert(departments, StockInfo.class);
+		for (StockInfo object : departments) {
+			stockInfoDAO.insert(object);
+		}
+		;
+	}
 
 	@Test
 	public void test2() {

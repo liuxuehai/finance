@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pi.stock.dao.StockInfoDAO">
+	<resultMap id="BaseResultMap" type="com.pi.stock.model.StockInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="fullName" property="fullName" jdbcType="VARCHAR" />
+		<result column="enName" property="enName" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="codeA" property="codeA" jdbcType="VARCHAR" />
+		<result column="nameA" property="nameA" jdbcType="VARCHAR" />
+		<result column="dateA" property="dateA" jdbcType="VARCHAR" />
+		<result column="gCapitalA" property="gCapitalA" jdbcType="VARCHAR" />
+		<result column="fCapitalA" property="fCapitalA" jdbcType="VARCHAR" />
+		<result column="codeB" property="codeB" jdbcType="VARCHAR" />
+		<result column="nameB" property="nameB" jdbcType="VARCHAR" />
+		<result column="dateB" property="dateB" jdbcType="VARCHAR" />
+		<result column="gCapitalB" property="gCapitalB" jdbcType="VARCHAR" />
+		<result column="fCapitalB" property="fCapitalB" jdbcType="VARCHAR" />
+		<result column="area" property="area" jdbcType="VARCHAR" />
+		<result column="province" property="province" jdbcType="VARCHAR" />
+		<result column="city" property="city" jdbcType="VARCHAR" />
+		<result column="industry" property="industry" jdbcType="VARCHAR" />
+		<result column="website" property="website" jdbcType="VARCHAR" />
+		<result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="updateTime" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, code, name, fullName, enName, address, codeA, nameA, dateA,
+		gCapitalA, fCapitalA,
+		codeB, nameB, dateB, gCapitalB, fCapitalB, area, province, city, industry,
+		website,
+		createTime, updateTime
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from StockInfo
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="com.pi.stock.model.StockInfo">
+		insert into StockInfo (code, name,
+		fullName, enName, address,
+		codeA, nameA, dateA,
+		gCapitalA, fCapitalA, codeB,
+		nameB, dateB, gCapitalB,
+		fCapitalB, area, province,
+		city, industry, website,
+		createTime, updateTime)
+		values ( #{code,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR},
+		#{fullName,jdbcType=VARCHAR}, #{enName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
+		#{codeA,jdbcType=VARCHAR}, #{nameA,jdbcType=VARCHAR},
+		#{dateA,jdbcType=VARCHAR},
+		#{gCapitalA,jdbcType=VARCHAR}, #{fCapitalA,jdbcType=VARCHAR}, #{codeB,jdbcType=VARCHAR},
+		#{nameB,jdbcType=VARCHAR}, #{dateB,jdbcType=VARCHAR},
+		#{gCapitalB,jdbcType=VARCHAR},
+		#{fCapitalB,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR},
+		#{city,jdbcType=VARCHAR}, #{industry,jdbcType=VARCHAR},
+		#{website,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+	</insert>
+	<update id="updateByPrimaryKey" parameterType="com.pi.stock.model.StockInfo">
+		update StockInfo
+		set code = #{code,jdbcType=VARCHAR},
+		name = #{name,jdbcType=VARCHAR},
+		fullName = #{fullName,jdbcType=VARCHAR},
+		enName = #{enName,jdbcType=VARCHAR},
+		address = #{address,jdbcType=VARCHAR},
+		codeA = #{codeA,jdbcType=VARCHAR},
+		nameA = #{nameA,jdbcType=VARCHAR},
+		dateA = #{dateA,jdbcType=VARCHAR},
+		gCapitalA = #{gCapitalA,jdbcType=VARCHAR},
+		fCapitalA = #{fCapitalA,jdbcType=VARCHAR},
+		codeB = #{codeB,jdbcType=VARCHAR},
+		nameB = #{nameB,jdbcType=VARCHAR},
+		dateB = #{dateB,jdbcType=VARCHAR},
+		gCapitalB = #{gCapitalB,jdbcType=VARCHAR},
+		fCapitalB = #{fCapitalB,jdbcType=VARCHAR},
+		area = #{area,jdbcType=VARCHAR},
+		province = #{province,jdbcType=VARCHAR},
+		city = #{city,jdbcType=VARCHAR},
+		industry = #{industry,jdbcType=VARCHAR},
+		website = #{website,jdbcType=VARCHAR},
+		createTime = #{createTime,jdbcType=TIMESTAMP},
+		updateTime = #{updateTime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<select id="selectByCode" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from StockInfo
+		where code = #{code,jdbcType=INTEGER}
+	</select>
+</mapper>

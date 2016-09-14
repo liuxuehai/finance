@@ -21,6 +21,7 @@ import com.pi.base.HttpMethod;
 import com.pi.service.handler.StockInfoHandler;
 import com.pi.service.header.HeaderBuilder;
 import com.pi.service.processor.StockPriceProcessor;
+import com.pi.stock.dao.StockInfoDAO;
 import com.pi.stock.model.StockInfo;
 
 public class StockInfoDisruptorTest6 {
@@ -32,7 +33,7 @@ public class StockInfoDisruptorTest6 {
 	public static void main(String[] args) {
 		context = new ClassPathXmlApplicationContext("classpath:spring/*.xml");
 
-		MongoTemplate mongoTemplate = context.getBean(MongoTemplate.class);
+		StockInfoDAO stockInfoDAO = context.getBean(StockInfoDAO.class);
 		stockInfoDisruptor = context.getBean(StockInfoDisruptor2.class);
 		
 		Query query = new Query();
@@ -49,13 +50,27 @@ public class StockInfoDisruptorTest6 {
 //		nio.add("600604");
 		//query.addCriteria(Criteria.where("dateA").lt("2004-10-8"));
 		List<String> in = new ArrayList<String>();
-		in.add("600610");
-		in.add("600611");
+		//in.add("600054");
+		//in.add("600190");
+		//in.add("600221");
+		//in.add("600272");
+//		in.add("600295");
+//		in.add("600320");
+//		in.add("600555");
+//		in.add("600602");
+//		in.add("600604");
+//		in.add("600610");
+//		in.add("600611");
+//		in.add("600612");
+//		in.add("600613");
+		in.add("600614");
+		in.add("600617");
+		in.add("600618");
 		
-		query.addCriteria(Criteria.where("code").in(in));
-
-		List<StockInfo> infos = mongoTemplate.find(query, StockInfo.class);
-		for (StockInfo stockInfo : infos) {
+		//query.addCriteria(Criteria.where("code").in(in));
+		
+		for (String string : in) {
+			StockInfo stockInfo =stockInfoDAO.selectByCode(string);
 			fentch(stockInfo);
 		}
 	}
@@ -71,9 +86,9 @@ public class StockInfoDisruptorTest6 {
 			start = start.plusDays(1);
 			DayOfWeek dayOfWeek = start.getDayOfWeek();
 			if (!(dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY)) {
-				if (i!=0&&i % 10 == 0) {
+				if (i!=0&&i % 3 == 0) {
 					try {
-						Thread.sleep(30000);
+						Thread.sleep(10000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -97,9 +112,7 @@ public class StockInfoDisruptorTest6 {
 				StockInfoHandler sinaDetailHandle = new StockInfoHandler();
 				sinaDetailHandle.setRemoveTitle(true);
 				request.setHeader(HeaderBuilder.getHeader(HeaderBuilder.SINA));
-
 				request.setResponseHandler(sinaDetailHandle);
-
 				request.setHttpMethod(HttpMethod.GET);
 				request.setProcessor(context.getBean(StockPriceProcessor.class));
 				request.setParam(param);

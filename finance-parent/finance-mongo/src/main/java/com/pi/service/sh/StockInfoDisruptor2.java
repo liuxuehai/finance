@@ -27,7 +27,7 @@ import com.pi.service.processor.SzStockInfoProcessor;
 public class StockInfoDisruptor2 implements ApplicationContextAware {
 	private ApplicationContext applicationContext;
 	private Logger logger = LoggerFactory.getLogger(StockInfoDisruptor2.class);
-	private static final int NUM_EVENT_PROCESSORS = 10;
+	private static final int NUM_EVENT_PROCESSORS = 3;
 	private static final int NUM_EVENT_PRODUCER = 1;
 	private static final int BUFFER_SIZE = 1024 * 1024;
 
@@ -62,8 +62,8 @@ public class StockInfoDisruptor2 implements ApplicationContextAware {
 			gatingSequences.add(s);
 		}
 		ringBuffer.addGatingSequences(gatingSequences.toArray(new Sequence[gatingSequences.size()]));
-		ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 10, 2, TimeUnit.MINUTES,
-				new LinkedBlockingQueue<Runnable>(10));
+		ThreadPoolExecutor executor = new ThreadPoolExecutor(3, 3, 2, TimeUnit.MINUTES,
+				new LinkedBlockingQueue<Runnable>(1024));
 		crawler.start(executor);
 		applier.start(executor);
 

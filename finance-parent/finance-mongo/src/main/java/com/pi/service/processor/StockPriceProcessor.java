@@ -10,14 +10,17 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Component;
 
 import com.pi.base.BaseRequest;
+import com.pi.db.mysql.service.StockPriceDetailService;
 import com.pi.stock.model.StockPriceDetail;
 
 @Component
 public class StockPriceProcessor implements BaseProcessor<List<String>> {
 
 	private Logger logger = LoggerFactory.getLogger(StockPriceProcessor.class);
-	@Autowired
+	//@Autowired
 	private MongoTemplate mongo;
+	@Autowired
+	private StockPriceDetailService stockPriceDetailService;
 
 	@Override
 	public void process(BaseRequest<List<String>> request, List<String> infos) {
@@ -38,15 +41,17 @@ public class StockPriceProcessor implements BaseProcessor<List<String>> {
 				price.setDate(date);
 				price.setDateTime(temp[0].trim());
 				price.setPrice(temp[1].trim());
-				price.setPriceM(temp[2].trim());
+				price.setPriceChange(temp[2].trim());
 				price.setVolume(temp[3].trim());
 				price.setTurnover(temp[4].trim());
 				price.setType(temp[5].trim());
 				prices.add(price);
 			}
 		}
+		
+		stockPriceDetailService.insertPriceBatch(prices);
 
-		mongo.insertAll(prices);
+//		mongo.insertAll(prices);
 	}
 
 }

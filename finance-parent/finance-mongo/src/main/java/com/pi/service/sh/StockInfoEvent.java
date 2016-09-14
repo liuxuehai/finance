@@ -1,8 +1,8 @@
 package com.pi.service.sh;
 
 
-import com.pi.base.BaseObject;
 import com.pi.base.ExcelRequest;
+import com.pi.stock.model.BaseObject;
 
 public class StockInfoEvent  extends BaseObject{
 

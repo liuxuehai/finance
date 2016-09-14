@@ -10,14 +10,17 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Component;
 
 import com.pi.base.BaseRequest;
+import com.pi.stock.dao.StockInfoDAO;
 import com.pi.stock.model.StockInfo;
 
 @Component
 public class SzStockInfoProcessor implements BaseProcessor<List<String>> {
 
 	private Logger logger = LoggerFactory.getLogger(SzStockInfoProcessor.class);
-	@Autowired
+	//@Autowired
 	private MongoTemplate mongo;
+	@Autowired
+	private StockInfoDAO stockInfoDAO;
 	
 	@Override
 	public void process(BaseRequest<List<String>> request, List<String> infos) {
@@ -48,6 +51,7 @@ public class SzStockInfoProcessor implements BaseProcessor<List<String>> {
 			stock.setIndustry(temp[18].trim());
 			stock.setWebsite(temp[19].trim());
 			stockInfos.add(stock);
+			stockInfoDAO.insert(stock);
 		}
 		
 		//mongo.insertAll(stockInfos);

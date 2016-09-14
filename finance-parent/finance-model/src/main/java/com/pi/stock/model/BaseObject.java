@@ -1,4 +1,4 @@
-package com.pi.base;
+package com.pi.stock.model;
 
 import java.io.Serializable;
 

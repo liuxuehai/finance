@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-4.1.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/tx
+			http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<tx:annotation-driven transaction-manager="fianaceTm"
+		proxy-target-class="true" mode="proxy" order="100" />
+
+	<context:property-placeholder
+		ignore-unresolvable="true" ignore-resource-not-found="true"
+		location="classpath:jdbc.properties" order="10" />
+	<bean id="fianaceTm"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		p:dataSource-ref="financeDataSource" p:defaultTimeout="3" />
+
+	<bean id="financeDataSourceProxy"
+		class="org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy">
+		<property name="targetDataSource" ref="financeDataSource" />
+	</bean>
+
+	<bean id="fianaceJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="financeDataSourceProxy" />
+	</bean>
+
+	<!-- user 数据源配置 -->
+	<bean id="financeDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+		lazy-init="true">
+		<property name="driverClassName" value="${finance.jdbc.driverclass}" />
+		<property name="url" value="${finance.jdbc.url}" />
+		<property name="username" value="${finance.jdbc.username}" />
+		<property name="password" value="${finance.jdbc.password}" />
+	</bean>
+
+	<bean id="financeTransactionTemplate"
+		class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager" ref="fianaceTm" />
+		<property name="propagationBehaviorName" value="PROPAGATION_REQUIRES_NEW" />
+	</bean>
+
+
+	<bean id="financeSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="financeDataSource" />
+		<property name="configLocation" value="classpath:mybatis_config.xml" />
+		<property name="failFast" value="true" />
+		<property name="mapperLocations">
+			<array>
+				<value>classpath*:/sqlmap/*.xml</value>
+			</array>
+		</property>
+	</bean>
+
+	<bean id="financeMapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.pi.stock.dao" />
+		<property name="sqlSessionFactoryBeanName" value="financeSqlSessionFactory" />
+	</bean>
+	<bean id="financeSimpleSqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="financeSqlSessionFactory" />
+		<constructor-arg index="1" value="SIMPLE" />
+	</bean>
+
+</beans>
