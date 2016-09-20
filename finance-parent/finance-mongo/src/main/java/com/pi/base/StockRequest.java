@@ -1,0 +1,14 @@
+package com.pi.base;
+
+import java.util.List;
+
+
+public class StockRequest extends BaseRequest<List<String>> {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
+}
