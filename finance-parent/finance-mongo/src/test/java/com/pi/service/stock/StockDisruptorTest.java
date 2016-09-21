@@ -34,12 +34,27 @@ public class StockDisruptorTest {
 
 		List<String> in = new ArrayList<String>();
 
-		in.add("600005");
-		in.add("600006");
-		in.add("600008");
-		in.add("600009");
-		in.add("600010");
-		in.add("600011");
+//		in.add("600012");
+//		in.add("600015");
+//		in.add("600016");
+//		in.add("600019");
+//		in.add("600020");
+//		in.add("600021");
+//		
+//		in.add("600022");
+//		in.add("600026");
+//		in.add("600028");
+		
+		in.add("600029");
+		in.add("600030");
+		in.add("600031");
+		
+		in.add("600033");
+		in.add("600035");
+		in.add("600036");
+		in.add("600037");
+		in.add("600038");
+		in.add("600039");
 
 		for (String string : in) {
 			StockInfo stockInfo = stockInfoDAO.selectByCode(string);
@@ -92,7 +107,7 @@ public class StockDisruptorTest {
 //					}
 //				}
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(2000);
 				} catch (InterruptedException e) {
 				}
 				logger.info("发起请求日期:" + start.toString()+"code:"+stockInfo.getCode()+"序号:"+i);
