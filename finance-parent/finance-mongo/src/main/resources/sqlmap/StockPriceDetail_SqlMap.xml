@@ -21,62 +21,54 @@
 		updateTime
 	</sql>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
-		parameterType="java.lang.Integer">
+		parameterType="java.lang.Integer" statementType="STATEMENT">
 		select
 		<include refid="Base_Column_List" />
-		from StockPriceDetail
-		where id = #{id,jdbcType=INTEGER}
+		from ${tableName}
+		where id = '${id}'
 	</select>
-	<insert id="insert" parameterType="com.pi.stock.model.StockPriceDetail">
-		insert into StockPriceDetail (
+	<insert id="insert" parameterType="com.pi.stock.model.StockPriceDetail"
+		statementType="STATEMENT">
+		insert into ${tableName} (
 		code, date,
 		dateTime, price, priceChange,
-		volume, turnover, type,
-		createTime, updateTime)
-		values ( #{code,jdbcType=VARCHAR},
-		#{date,jdbcType=VARCHAR},
-		#{dateTime,jdbcType=VARCHAR},
-		#{price,jdbcType=VARCHAR},
-		#{priceChange,jdbcType=VARCHAR},
-		#{volume,jdbcType=VARCHAR}, #{turnover,jdbcType=VARCHAR},
-		#{type,jdbcType=VARCHAR},
-		#{createTime,jdbcType=TIMESTAMP},
-		#{updateTime,jdbcType=TIMESTAMP})
+		volume,
+		turnover, type)
+		values ( '${record.code}',
+		'${record.date}',
+		'${record.dateTime}',
+		'${record.price}',
+		'${record.priceChange}',
+		'${record.volume}', '${record.turnover}',
+		'${record.type}')
 	</insert>
-	<update id="updateByPrimaryKey" parameterType="com.pi.stock.model.StockPriceDetail">
+	<update id="updateByPrimaryKey" parameterType="com.pi.stock.model.StockPriceDetail"
+		statementType="STATEMENT">
 		update
 		StockPriceDetail
-		set code = #{code,jdbcType=VARCHAR},
-		date =
-		#{date,jdbcType=VARCHAR},
-		dateTime = #{dateTime,jdbcType=VARCHAR},
-		price = #{price,jdbcType=VARCHAR},
-		priceChange =
-		#{priceChange,jdbcType=VARCHAR},
-		volume = #{volume,jdbcType=VARCHAR},
-		turnover = #{turnover,jdbcType=VARCHAR},
-		type =
-		#{type,jdbcType=VARCHAR},
-		createTime =
-		#{createTime,jdbcType=TIMESTAMP},
-		updateTime =
-		#{updateTime,jdbcType=TIMESTAMP}
-		where id = #{id,jdbcType=INTEGER}
+		set code = '${record.code}',
+		date ='${record.date}',
+		dateTime = '${record.dateTime}',
+		price = '${record.price}',
+		priceChange ='${record.priceChange}',
+		volume = '${record.volume}',
+		turnover = '${record.turnover}',
+		type ='${record.type}'
+		where id ='${record.id}'
 	</update>
 
 	<insert id="insertPriceBatch" useGeneratedKeys="true"
-		parameterType="java.util.List">
-		insert into StockPriceDetail ( code, date,
+		statementType="STATEMENT">
+		insert into ${tableName} ( code, date,
 		dateTime, price,
 		priceChange,
-		volume, turnover, type,
-		createTime, updateTime)
+		volume, turnover, type)
 		values
-		<foreach collection="list" item="item" index="index"
+		<foreach collection="record" item="item" index="index"
 			separator=",">
-			(#{item.code},#{item.date},#{item.dateTime},#{item.price}
-			,#{item.priceChange},#{item.volume},#{item.turnover},#{item.type}
-			,#{item.createTime},#{item.updateTime})
+			('${item.code}','${item.date}','${item.dateTime}','${item.price}'
+			,'${item.priceChange}','${item.volume}','${item.turnover}','${item.type}'
+			)
 		</foreach>
 	</insert>
 </mapper>

@@ -45,16 +45,29 @@ public class StockDisruptorTest {
 //		in.add("600026");
 //		in.add("600028");
 		
-		in.add("600029");
-		in.add("600030");
-		in.add("600031");
+		//in.add("600029");
+//		in.add("600030");
+//		in.add("600031");
+//		
+//		in.add("600033");
+//		in.add("600035");
+//		in.add("600036");
+//		in.add("600037");
+//		in.add("600038");
+//		in.add("600039");
 		
-		in.add("600033");
-		in.add("600035");
-		in.add("600036");
-		in.add("600037");
-		in.add("600038");
-		in.add("600039");
+		
+		in.add("600050");
+		in.add("600051");
+		in.add("600052");
+		in.add("600053");
+		in.add("600055");
+		in.add("600056");
+		in.add("600057");
+		in.add("600058");
+		in.add("600059");
+		in.add("600060");
+		in.add("600061");
 
 		for (String string : in) {
 			StockInfo stockInfo = stockInfoDAO.selectByCode(string);

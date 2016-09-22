@@ -12,24 +12,24 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.pi.stock.dao.StockPriceDetailDAO;
 import com.pi.stock.model.StockPriceDetail;
 
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations = "classpath:spring/*.xml")
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:spring/*.xml")
 public class StockPriceDetailDAOTest {
 
-	//@Autowired
+	@Autowired
 	StockPriceDetailDAO stockPriceDetailDAO;
 
 	@Test
 	public void test() {
 		List<StockPriceDetail> stockPriceDetails = new ArrayList<StockPriceDetail>();
 
-		for (int i = 0; i < 1004; i++) {
+		for (int i = 0; i < 100; i++) {
 			StockPriceDetail detail = new StockPriceDetail();
 			detail.setCode("22");
 			stockPriceDetails.add(detail);
 		}
 
-		// stockPriceDetailDAO.insertPriceBatch(stockPriceDetails);
+		stockPriceDetailDAO.insertPriceBatch(stockPriceDetails,"Price000001");
 
 		int size = stockPriceDetails.size();
 		int limit = 200;

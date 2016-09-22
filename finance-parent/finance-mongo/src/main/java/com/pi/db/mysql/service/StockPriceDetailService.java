@@ -24,20 +24,21 @@ public class StockPriceDetailService {
 		int limit = 200;
 		int start = 0;
 		int end = start + limit;
+		String tableName = "Price" + record.get(0).getCode();
 
 		if (end > size) {
-			stockPriceDetailDAO.insertPriceBatch(record);
+			stockPriceDetailDAO.insertPriceBatch(record, tableName);
 		} else {
 			int part = size / limit;
 			logger.info("共有 [{}]条,! 分为 :[{}]批", size, part);
 
 			for (int i = 0; i < part; i++) {
 				List<StockPriceDetail> listPage = record.subList(0, limit);
-				stockPriceDetailDAO.insertPriceBatch(listPage);
+				stockPriceDetailDAO.insertPriceBatch(listPage, tableName);
 				record.subList(0, limit).clear();
 			}
 			if (!record.isEmpty()) {
-				stockPriceDetailDAO.insertPriceBatch(record);
+				stockPriceDetailDAO.insertPriceBatch(record, tableName);
 			}
 		}
 
