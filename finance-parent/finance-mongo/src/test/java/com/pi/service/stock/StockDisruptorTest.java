@@ -56,18 +56,48 @@ public class StockDisruptorTest {
 //		in.add("600038");
 //		in.add("600039");
 		
+//		in.add("600059");
+//		in.add("600060");
+//		in.add("600061");
+//		in.add("600062");
+//		in.add("600063");
+		in.add("600064");
 		
-		in.add("600050");
-		in.add("600051");
-		in.add("600052");
-		in.add("600053");
-		in.add("600055");
-		in.add("600056");
-		in.add("600057");
-		in.add("600058");
-		in.add("600059");
-		in.add("600060");
-		in.add("600061");
+		in.add("600066");
+		in.add("600067");
+		in.add("600068");
+		in.add("600069");
+		in.add("600070");
+		in.add("600071");
+		
+		
+		in.add("600072");
+		in.add("600073");
+		in.add("600074");
+		in.add("600075");
+		in.add("600076");
+		in.add("600077");
+		
+		in.add("600078");
+		in.add("600079");
+		in.add("600080");
+		in.add("600081");
+		in.add("600082");
+		in.add("600083");
+		
+		in.add("600084");
+		in.add("600085");
+		in.add("600086");
+		in.add("600087");
+		in.add("600088");
+		in.add("600089");
+		
+		in.add("600090");
+		in.add("600091");
+		in.add("600092");
+		in.add("600093");
+		in.add("600094");
+		in.add("600095");
 
 		for (String string : in) {
 			StockInfo stockInfo = stockInfoDAO.selectByCode(string);
