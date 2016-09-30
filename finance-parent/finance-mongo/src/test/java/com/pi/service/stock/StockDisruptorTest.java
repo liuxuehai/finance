@@ -90,15 +90,12 @@ public class StockDisruptorTest {
 //		in.add("600086");
 		
 		
-		in.add("600087");
 		in.add("600088");
 		in.add("600089");
 		
 		in.add("600090");
 		in.add("600091");
-		in.add("600092");
 		in.add("600093");
-		in.add("600094");
 		in.add("600095");
 		
 		
@@ -179,10 +176,32 @@ public class StockDisruptorTest {
 		in.add("600168");
 		in.add("600169");
 		in.add("600170");
+		
+		in.add("600171");
+		in.add("600172");
+		in.add("600173");
+		in.add("600175");
+		in.add("600176");
+		in.add("600177");
+		in.add("600178");
+		in.add("600179");
+		in.add("600180");
+		in.add("600182");
+		
+		in.add("600183");
+		in.add("600184");
+		in.add("600185");
+		in.add("600186");
+		in.add("600187");
+		in.add("600188");
+		in.add("600189");
+		in.add("600191");
 
 		for (String string : in) {
 			StockInfo stockInfo = stockInfoDAO.selectByCode(string);
-			fentch(stockInfo);
+			if(stockInfo!=null){
+				fentch(stockInfo);
+			}
 		}
 	}
 
@@ -232,10 +251,10 @@ public class StockDisruptorTest {
 //				}
 				try {
 					Thread.sleep(2000);
+					logger.info("发起请求日期:" + start.toString()+"code:"+stockInfo.getCode()+"序号:"+i);
+					process(stockInfo.getCode(), start.toString());
 				} catch (InterruptedException e) {
 				}
-				logger.info("发起请求日期:" + start.toString()+"code:"+stockInfo.getCode()+"序号:"+i);
-				process(stockInfo.getCode(), start.toString());
 			}
 		}
 		try {
