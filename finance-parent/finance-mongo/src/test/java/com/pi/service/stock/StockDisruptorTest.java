@@ -61,33 +61,35 @@ public class StockDisruptorTest {
 //		in.add("600061");
 //		in.add("600062");
 //		in.add("600063");
-		in.add("600064");
+//		in.add("600064");
+//		
+//		in.add("600066");
+//		in.add("600067");
+//		in.add("600068");
+//		in.add("600069");
+//		in.add("600070");
+//		in.add("600071");
+//		
+//		
+//		in.add("600072");
+//		in.add("600073");
+//		in.add("600074");
+//		in.add("600075");
+//		in.add("600076");
+//		in.add("600077");
+//		
+//		in.add("600078");
+//		in.add("600079");
+//		in.add("600080");
+//		in.add("600081");
+//		in.add("600082");
+//		in.add("600083");
+//		
+//		in.add("600084");
+//		in.add("600085");
+//		in.add("600086");
 		
-		in.add("600066");
-		in.add("600067");
-		in.add("600068");
-		in.add("600069");
-		in.add("600070");
-		in.add("600071");
 		
-		
-		in.add("600072");
-		in.add("600073");
-		in.add("600074");
-		in.add("600075");
-		in.add("600076");
-		in.add("600077");
-		
-		in.add("600078");
-		in.add("600079");
-		in.add("600080");
-		in.add("600081");
-		in.add("600082");
-		in.add("600083");
-		
-		in.add("600084");
-		in.add("600085");
-		in.add("600086");
 		in.add("600087");
 		in.add("600088");
 		in.add("600089");
@@ -98,6 +100,85 @@ public class StockDisruptorTest {
 		in.add("600093");
 		in.add("600094");
 		in.add("600095");
+		
+		
+		
+		in.add("600096");
+		in.add("600097");
+		in.add("600098");
+		in.add("600099");
+		in.add("600100");
+		in.add("600101");
+		
+		in.add("600103");
+		in.add("600104");
+		in.add("600105");
+		in.add("600106");
+		in.add("600107");
+		in.add("600108");
+		in.add("600109");
+		in.add("600110");
+		
+		in.add("600112");
+		in.add("600113");
+		in.add("600114");
+		in.add("600115");
+		in.add("600116");
+		in.add("600117");
+		in.add("600118");
+		in.add("600119");
+		
+		
+		in.add("600120");
+		in.add("600121");
+		in.add("600122");
+		in.add("600123");
+		in.add("600124");
+		in.add("600125");
+		in.add("600126");
+		in.add("600127");
+		
+		in.add("600128");
+		in.add("600129");
+		in.add("600130");
+		in.add("600131");
+		in.add("600132");
+		in.add("600133");
+		in.add("600135");
+		in.add("600136");
+		
+		in.add("600137");
+		in.add("600138");
+		in.add("600139");
+		in.add("600141");
+		in.add("600143");
+		in.add("600145");
+		
+		
+		in.add("600146");
+		in.add("600148");
+		in.add("600149");
+		in.add("600150");
+		in.add("600151");
+		in.add("600152");
+		in.add("600153");
+		
+		in.add("600155");
+		in.add("600156");
+		in.add("600157");
+		in.add("600158");
+		in.add("600159");
+		
+		in.add("600160");
+		in.add("600161");
+		in.add("600162");
+		in.add("600163");
+		in.add("600165");
+		in.add("600166");
+		in.add("600167");
+		in.add("600168");
+		in.add("600169");
+		in.add("600170");
 
 		for (String string : in) {
 			StockInfo stockInfo = stockInfoDAO.selectByCode(string);
@@ -134,7 +215,7 @@ public class StockDisruptorTest {
 	private static void fentch(StockInfo stockInfo) {
 
 		// 2004-10-8
-		LocalDate today = LocalDate.now();
+		LocalDate today = LocalDate.of(2016, 9, 30);
 		LocalDate start = LocalDate.of(2004, 10, 7);
 		long s = start.until(today, ChronoUnit.DAYS);
 		for (int i = 0; i <= s; i++) {

@@ -18,7 +18,7 @@
 	<import resource="classpath:spring/finance_mybatis.xml" />
 	<import resource="classpath:spring/finance_mongo.xml" />
 
-    <task:executor id="myexecutor" pool-size="10"  queue-capacity="1024"/>  
+    <task:executor id="myexecutor" pool-size="10"  queue-capacity="1024000"/>  
     <task:annotation-driven executor="myexecutor" />  
 
 	<context:annotation-config />
