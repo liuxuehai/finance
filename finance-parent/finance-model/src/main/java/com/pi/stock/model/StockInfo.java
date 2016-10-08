@@ -2,6 +2,8 @@ package com.pi.stock.model;
 
 import java.util.Date;
 
+import com.pi.stock.base.BaseObject;
+
 public class StockInfo extends BaseObject {
 	private static final long serialVersionUID = 1L;
 

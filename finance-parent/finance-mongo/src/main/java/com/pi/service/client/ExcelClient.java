@@ -1,7 +1,6 @@
 package com.pi.service.client;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.pi.base.BaseRequest;
-import com.pi.base.ExcelRequest;
 import com.pi.connection.HttpConnectionManager;
 
 @Component
@@ -22,7 +20,7 @@ public class ExcelClient {
 	@Autowired
 	private PiClient piClient;
 
-	private Logger logger = LoggerFactory.getLogger(ExcelClientTest.class);
+	private Logger logger = LoggerFactory.getLogger(ExcelClient.class);
 
 	public void get(BaseRequest<? extends Object> request) {
 		logger.info("下载文件开始,url:[{}],请求参数:[{}]", request.getUrl(), request.getParam().toString());

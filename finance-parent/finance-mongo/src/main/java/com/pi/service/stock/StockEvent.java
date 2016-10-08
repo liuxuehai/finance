@@ -1,7 +1,7 @@
 package com.pi.service.stock;
 
 import com.pi.base.StockRequest;
-import com.pi.stock.model.BaseObject;
+import com.pi.stock.base.BaseObject;
 
 public class StockEvent extends BaseObject {
 

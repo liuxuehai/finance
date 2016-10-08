@@ -21,7 +21,7 @@ public class CommonClient {
 	@Autowired
 	private PiClient piClient;
 
-	private Logger logger = LoggerFactory.getLogger(ExcelClientTest.class);
+	private Logger logger = LoggerFactory.getLogger(CommonClient.class);
 
 	@Async
 	public <T> void get(BaseRequest<T> request) {
@@ -33,9 +33,9 @@ public class CommonClient {
 			long start = System.currentTimeMillis();
 			@SuppressWarnings("unchecked")
 			T object = (T) client.execute(httpRequestBase, request.getResponseHandler());
-			
+
 			request.getProcessor().process(request, object);
-			logger.info("处理文件用时[{}] ms", (System.currentTimeMillis() - start) );
+			logger.info("处理文件用时[{}] ms", (System.currentTimeMillis() - start));
 		} catch (IOException e) {
 			logger.error("获取文件失败,url:[{}],错误:[{}]", request.getUrl(), e);
 		} finally {

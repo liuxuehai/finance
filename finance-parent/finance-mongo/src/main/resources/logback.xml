@@ -5,7 +5,7 @@
     <Property name="log.base" value="/log/app/${project.name}" />
     <Property name="log.name" value="${project.name}" />
 
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="STDOUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>%-5level [%contextName] %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %logger - %msg%n</pattern>
         </encoder>
@@ -49,7 +49,7 @@
     </appender>
 
     <root level="${log.level}">
-        <appender-ref ref="STDOUT" />
+       <!--  <appender-ref ref="STDOUT" /> -->
         <appender-ref ref="ASYNC" />
         <appender-ref ref="ASYNC-ERROR" />
     </root>

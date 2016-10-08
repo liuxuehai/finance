@@ -5,7 +5,7 @@ import java.util.Map;
 import org.apache.http.client.ResponseHandler;
 
 import com.pi.service.processor.BaseProcessor;
-import com.pi.stock.model.BaseObject;
+import com.pi.stock.base.BaseObject;
 
 public class BaseRequest<T extends Object> extends BaseObject {
 
