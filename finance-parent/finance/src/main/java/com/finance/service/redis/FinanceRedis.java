@@ -43,6 +43,17 @@ public class FinanceRedis {
 		return result;
 	}
 
+	public long lpush(final String key, final String data) {
+		long result = template.execute(new RedisCallback<Long>() {
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				long v = connection.lPush(key.getBytes(), data.getBytes());
+				return v;
+			}
+		});
+		return result;
+	}
+
 	public long llen(final String key) {
 		long result = template.execute(new RedisCallback<Long>() {
 			@Override
