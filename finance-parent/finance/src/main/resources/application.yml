@@ -1,0 +1,59 @@
+project:
+  artifactId: finance
+  name: finance
+  description: finance
+
+# Server settings (ServerProperties)
+server:
+  port: 8080
+  address: 127.0.0.1
+  name: finance
+  sessionTimeout: 30
+  contextPath: /
+
+  # Tomcat specifics
+  tomcat:
+    accessLogEnabled: false
+    protocolHeader: x-forwarded-proto
+    remoteIpHeader: x-forwarded-for
+    basedir:
+    backgroundProcessorDelay: 30 # secs
+
+security:
+  basic:
+    enabled: false
+  require_ssl: false
+  ignored: 
+    - /lib/**
+    - /css/**
+    - /font-custom/**
+    - /img/**
+    - /500
+    - /404
+    
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.1.105/finance?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    username: root
+    password: 123456
+  redis:
+     host: 192.168.1.105
+     port: 6379
+     pool:
+       max-idle: 8
+       min-idle: 0
+       max-active: 8 
+       max-wait: -1  
+
+management:
+  address: 127.0.0.1
+  shell:
+     ssh: 
+        enabled: true
+        port : 2222
+     auth: spring
+     
+
+    
+    
