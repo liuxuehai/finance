@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+<title class="site-title">股市行情技术分析</title>
+
+<meta name="viewport" content="user-scalable=yes, width=device-width">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<meta name="HandheldFriendly" content="true">
+<meta name="googlebot" content="noindex">
+<script src="./files/hm.js" th:src="@{/files/hm.js}"></script>
+<script async="" src="./files/analytics.js"></script>
+
+<!--[if gte IE 9]><!-->
+<script src="./files/jQuery.js"></script>
+<!--<![endif]-->
+
+<script src="./files/Datafeeds.js"></script>
+
+<style type="text/css">
+html, body {
+	margin: 0px;
+	height: 100%;
+	width: 100%;
+}
+
+#tv_chart_container {
+	height: 100%;
+	width: 100%;
+}
+</style>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Messages : View</title>
+</head>
+<body>
+	<div id="tv_chart_container">
+		<iframe id="tradingview_b6261" width="100%" height="100%"
+			frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+		<input type="hidden" id="symbol" th:value="${symbol}">
+		 <input type="hidden" id="interval" th:value="${interval}">
+	</div>
+
+
+	<!--[if gte IE 9]><!-->
+	<script>
+		var chartEnable = true;
+	</script>
+	<!--<![endif]-->
+	<!--[if lt IE 9]>
+    <script>
+		var chartEnable = false;
+    </script>
+    <![endif]-->
+	<script>
+		var symbol = $("#symbol").val();
+		var interval = $("#interval").val();
+		$(document)
+				.ready(
+						function() {
+							TradingView
+									.onready(function() {
+
+										var widget = new TradingView.widget(
+												{
+													width : '100%',
+													height : '100%',
+													symbol : symbol,
+													interval : interval,
+													toolbar_bg : '#f4f7f9',
+													allow_symbol_change : false,
+													save_image : false,
+													hideideas : true,
+													locale : "cn_s",
+													container_id : "tv_chart_container",
+													//	BEWARE: no trailing slash is expected in feed URL
+													//datafeed: new Datafeeds.UDFCompatibleDatafeed("http://datafeeds.tvbs:8089"),
+													datafeed : new Datafeeds.UDFCompatibleDatafeed(
+															"https://apimarkets.wallstreetcn.com/v1/tradingView"),
+													library_path : "/js/",
+													//	Regression Trend-related functionality is not implemented yet, so it's hidden for a while
+													disabled_drawings : [ "Regression Trend" ]
+												});
+
+										widget.onChartReady(function() {
+											$("iframe").contents().find(
+													".getimage").css("display",
+													"none");
+											$("iframe").contents().find(
+													".chart-status-picture")
+													.css("display", "none");
+										});
+									})
+						});
+	</script>
+</body>
+</html>
